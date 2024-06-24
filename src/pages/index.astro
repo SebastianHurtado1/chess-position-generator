@@ -4,8 +4,20 @@ import Card from '../components/Card.astro';
 ---
 
 <Layout title="Welcome to Chess Position Generator.">
+	<header class="text-center py-4">
+		<h1 class="text-5xl pb-4">Chess Position Generator</h1>
+		<h3 class="text-lg text-slate-300">Generate positions from real games played by top players</h3>
+	</header>
 	<main>
-		<h1 class="header">Chess Position Generator</h1>
+		<div class="chess-board-container">
+			<span>FEN</span>
+			<buton>rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1</buton>
+		</div>
+		<aside>
+			<p>
+				Coming soon...
+			</p>
+		</aside>
 	</main>
 </Layout>
 
@@ -14,10 +26,14 @@ import Card from '../components/Card.astro';
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		height: 100vh;
+		border: 1px solid teal;
 	}
-	.header {
-		color: white
+
+	aside {
+		border: 1px solid red;
 	}
-	
+
+	.chess-board-container {
+		border: 1px solid blue;
+	}
 </style>
