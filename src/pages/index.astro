@@ -12,14 +12,14 @@ import Card from '../components/Card.astro';
 		<div>
 
 			<p>FEN</p>
-			<div class="fen-container flex items-center justify-between bg-slate-700 cursor-pointer hover:bg-slate-600 active:bg-slate-500 ">
-				<buton class="p-2 block cursor-pointer">rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1</buton>
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 mr-1">
+			<div class="fen-container flex items-center justify-between bg-slate-700 cursor-pointer hover:bg-slate-600 active:bg-slate-500 xl:max-w-5xl lg:max-w-2xl md:max-w-lg sm:max-w-sm">
+				<buton class="p-2 block cursor-pointer text-xs">rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1</buton>
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-2 mr-1">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" />
 				</svg>				
 			</div>
-			<div class="chess-board-container flex my-2">
-				<img class="chess-board bg-emerald-600 flex justify-center items-center aspect-square mr-2" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Chessboard480.svg/416px-Chessboard480.svg.png"></img>
+			<div class="chess-board-container md:flex md:my-2">
+				<img class="chess-board bg-emerald-600 flex justify-center items-center aspect-square mr-2 xl:max-w-5xl lg:max-w-2xl md:max-w-lg sm:max-w-sm" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Chessboard480.svg/416px-Chessboard480.svg.png"></img>
 				<aside class="flex flex-col justify-between">
 						<select class="bg-slate-700 p-2 cursor-pointer" name="pets" id="pet-select">
 							<option value="">Type of Game</option>
@@ -54,7 +54,7 @@ import Card from '../components/Card.astro';
 						</div>
 				</aside>
 			</div>
-			<buton class="generate-button p-2 block cursor-pointer bg-slate-700 flex justify-center hover:bg-slate-600 active:bg-slate-500">Generate new position</buton>
+			<buton class="generate-button p-2 block cursor-pointer bg-slate-700 flex justify-center hover:bg-slate-600 active:bg-slate-500 xl:max-w-5xl lg:max-w-2xl md:max-w-lg sm:max-w-sm">Generate new position</buton>
 		</div>
 	</main>
 </Layout>
