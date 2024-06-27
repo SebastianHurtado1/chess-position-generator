@@ -1,6 +1,6 @@
 ---
 import '../styles/chessboard.css';
-const ruyLopez = 'r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R';
+const ruyLopez = 'r2q1rk1/2p1bppp/p1n1bn2/1p2p3/4P3/2P2N2/PPBN1PPP/R1BQR1K1 w - - 1 12';
 ---
 
 
@@ -418,7 +418,7 @@ Il.ic=function(a){return Il.fc(a,Te)};Il.fc=function(a,b){var c=jj(a);return bb(
 }).call(this);
 
 
-const board = document.getElementById('chessboard');
-Chessboard2(board?.id, board?.dataset.fen);
+const boardElement = document.getElementById('chessboard');
+window.board = Chessboard2(boardElement?.id, boardElement?.dataset.fen);
 
 </script>

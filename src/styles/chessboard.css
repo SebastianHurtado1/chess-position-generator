@@ -1,5 +1,18 @@
-.board-container-41a68 {
-  border: none;
+.copied {
+  animation-duration: 1s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+  from {
+    translate: 0 0;
+    visibility: hidden;
+  }
+
+  to {
+    visibility: visible;
+    translate: 0 -20px;
+  }
 }
 
 /*! chessboard2 v0.5.0 | (c) 2021 Chris Oakman | ISC License | https://chessboardjs.com/v2 */
@@ -17,8 +30,6 @@
 }
 
 .board-container-41a68 {
-  border: 2px solid black;
-  box-sizing: border-box;
   position: relative;
 }
 

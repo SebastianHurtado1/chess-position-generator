@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Chessboard from '../components/chessboard.astro';
+import Chessboard from '../components/Chessboard.astro';
+
+const ruyLopez = 'r2q1rk1/2p1bppp/p1n1bn2/1p2p3/4P3/2P2N2/PPBN1PPP/R1BQR1K1 w - - 1 12';
 ---
 
 <Layout title="Welcome to Chess Position Generator.">
@@ -9,18 +11,19 @@ import Chessboard from '../components/chessboard.astro';
 		<h3 class="text-lg text-slate-300">Generate positions from real games played by top players</h3>
 	</header>
 	<div class="container mx-auto md:flex md:justify-center">
-		<main class="md:mr-2">
+		<main class="relative md:mr-2 md:max-w-[590px]">
+			<p id="copy-notification" class="invisible absolute bg-slate-700 text-white top-0 left-1/2 right-1/2 p-2 w-fit">Copied</p>
 			<p class="pl-2"><span class="md:hidden">Copy</span> FEN</p>
-			<div class="bg-slate-700 cursor-pointer hover:bg-slate-600 active:bg-slate-500 overflow-x-scroll md:overflow-auto flex items-center">
-				<button class="cursor-pointer text-nowrap p-2">
-						rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+			<div class="relative bg-slate-700 cursor-pointer hover:bg-slate-600 active:bg-slate-500 overflow-x-scroll md:overflow-auto flex items-center justify-between">
+				<button id="copy" class="cursor-pointer text-nowrap p-2 md:truncate md:max-w-[96%]" data-fen={ruyLopez}>
+					r2q1rk1/2p1bppp/p1n1bn2/1p2p3/4P3/2P2N2/PPBN1PPP/R1BQR1K1 w - - 1 12
 				</button>
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" />
 				</svg>				
 			</div>
 			<Chessboard />
-			<button class="w-full cursor-pointer p-2 bg-slate-700 hover:bg-slate-600 active:bg-slate-500 block text-center mb-2 md:m-0">
+			<button id="generate" class="w-full cursor-pointer p-2 bg-slate-700 hover:bg-slate-600 active:bg-slate-500 block text-center mb-2 md:m-0">
 				Generate Position
 			</button>
 		</main>
@@ -58,4 +61,103 @@ import Chessboard from '../components/chessboard.astro';
 			</div>
 		</aside>
 	</div>
+
+	<script>
+		const ruyLopezRealGamesRandom = [
+  '5rk1/2pq2p1/2nppn1p/4p3/p3P3/2QPPN1P/1PPN2P1/5RK1 b - - 1 19',
+  '1r2rbk1/2p2pp1/p1b2n1p/P2qP3/3P4/N5BP/2B3P1/R2QR1K1 w - - 3 23',
+  'r1bq1rk1/2p1bppp/p1n2n2/1p1Pp3/8/1BP2N2/PP1P1PPP/RNBQR1K1 b - - 0 9',
+  '1r1r1bk1/R7/5pqp/2p1p3/1p6/4B2P/1P3PP1/2Q1R1K1 b - - 3 29',
+  '3r1bk1/5pp1/7p/p3nP2/8/1B1pB2P/P4PP1/3R2K1 w - - 0 32',
+  'r1bqk2r/2ppbppp/p1n2n2/1p2p3/B3P3/3P1N2/PPP2PPP/RNBQ1RK1 w kq - 0 7',
+  'r3r1k1/1bq1bppp/p2p1n2/npp1p3/P3P3/2PP1N2/1PB2PPP/R1BQRNK1 w - - 4 14',
+  '8/6p1/5bk1/p4p1p/r5P1/5K1P/P1R2P2/2B5 w - - 0 37',
+  '1r2r1k1/1b3p1p/p1p3p1/2p1q2n/P1N1P3/7P/2Q2PP1/3RRBK1 b - - 1 26',
+  '2rqr1k1/4bpp1/p2p1n1p/1p6/3QP3/1b4NP/PP3PP1/R1B1R1K1 w - - 0 20',
+  'r2qk2r/1ppbbppp/p1np1n2/4p3/B2PP3/2P2N2/PP3PPP/RNBQR1K1 b kq - 4 8',
+  '6k1/2p2p2/6p1/1p6/1Pq1Q3/6PP/5P1K/8 w - - 1 39',
+  'r4rk1/p3q1p1/R2pb1n1/1pp1ppBp/4P2P/1P1P1P2/1PPN1KP1/Q6R b - - 1 19',
+  'r1bq1rk1/pppn1ppp/2p5/2b1p3/4P3/3P1N1P/PPP2PP1/RNBQ1RK1 w - - 1 8',
+  'r1bq1rk1/5ppp/p1pb4/1p1n4/8/1BPP4/PP3PPP/RNBQR1K1 b - - 2 13',
+  'r2q1rk1/1bpnbppp/p2p1n2/1p2p3/4P3/1BPP1N1P/PP1N1PP1/R1BQR1K1 w - - 5 12',
+  '4rrk1/5ppp/p1pb4/1p1n1b2/4N3/1BPP1QPq/PP3P1P/R1B1R1K1 b - - 4 17',
+  '6k1/3R4/4K1p1/6P1/r6P/8/8/8 b - - 0 73',
+  'r1bqkb1r/1pp2ppp/p1np1n2/4p3/B3P3/2PP1N2/PP3PPP/RNBQK2R b KQkq - 0 6',
+  'r5k1/5ppp/p1R5/1p1PN2b/1Q6/1r5P/1P4P1/5RK1 b - - 0 27',
+  'r1br2k1/p1p5/1bp4p/4Npp1/4n3/N1P3B1/PP3PPP/R4RK1 w - - 0 15',
+  'r2qr1k1/1p1b1pbp/n2p1np1/p1pP4/4P3/P4N1P/1P1N1PP1/RBBQR1K1 w - - 1 16',
+  '8/5p1k/6pb/4p2p/4P3/2Pb3P/1R3PP1/6K1 w - - 1 42',
+  '5rk1/3qbppp/p2p1n2/n3p3/1p2P3/1P1P1N1P/3N1PP1/2BQR1K1 b - - 0 18',
+  '4r1k1/1q1b1pb1/1n1p1npp/2pPp3/2P1P3/2BB1N1P/2QN1PP1/R5K1 b - - 3 25',
+  '1r1qrbk1/2p2pp1/3p1n1p/1p1P4/1n2P3/4BN1P/1P1N1PP1/R2QR1K1 w - - 1 20',
+  '6k1/6p1/2p1b2p/P6P/1KP2R2/r1B5/8/8 b - - 11 56',
+  '1rb1r1k1/2q2pp1/1b1p2np/1pp5/3Pn3/1B2BNNP/1P1Q1PP1/R3R1K1 w - - 0 20',
+  '6k1/4bppp/8/2P1P3/1p3B2/1B1b3P/5PP1/6K1 b - - 0 35',
+  '8/b7/8/p7/P4k2/2pKp3/2N4p/7B b - - 21 71',
+  '6n1/2p1nq1k/3p1pNp/1p6/1P1P3B/2P2Q2/6P1/5RK1 b - - 0 36',
+  'r3r1k1/3q1pp1/p2pb2p/Np6/1P1QPn2/5N1P/1P3PP1/R3R1K1 w - - 3 22',
+  '6k1/2R3p1/r3p2p/P3P3/8/1NBb1P1P/r5P1/6K1 b - - 4 38',
+  '8/8/2KB4/3Pb3/1r2k3/8/2R5/8 b - - 0 59',
+  'r1bqrbk1/5pp1/p2p1n1p/1ppP4/1n2P3/5N1P/PP1N1PP1/RBBQR1K1 b - - 0 15',
+  '3r2k1/2b2pp1/1n4bp/1p6/p3N3/2P1B2P/BP3PP1/4R1K1 b - - 0 32',
+  'r2qr1k1/1bpn1pbp/3p1np1/pp2p3/3PP3/2P2NNP/PPB2PP1/R1BQR1K1 w - - 0 15',
+  'Q7/5p1k/3p2bp/5q2/2P5/2R5/1p3BP1/6K1 w - - 0 46',
+  '1r3r1k/4b1p1/3P2qp/1P2p3/N1P1Q3/2P1B2P/5PP1/R4RK1 b - - 0 27',
+  '8/5p2/pr1p1kp1/R5p1/1P6/7P/5PP1/6K1 w - - 3 34',
+  'r7/2p2pb1/4k2p/p1p5/3p1N1R/1P4P1/P1P2PKP/8 b - - 1 32',
+  'r2q1rk1/1b3ppp/p5n1/1p1pPN2/4n3/4b2P/PPB2PP1/R2QRNK1 w - - 0 19',
+  'r2qr1k1/4bpp1/p1n2n1p/1pppp3/4P3/1PPP1NNP/1P2QPP1/R1B1R1K1 b - - 1 17',
+  'r1bqrbk1/ppp2pp1/2np1n1p/4p3/B2PP3/2P2N2/PP1N1PPP/R1BQR1K1 b - - 0 10',
+  '3b4/5pk1/p3r2p/P3p1p1/2Qp2P1/1K1P1PP1/8/8 w - - 19 55',
+  'r2r2k1/4bp2/6pp/pBp1p3/P7/2P1P2P/5KP1/2RR4 w - - 0 32',
+  'r1bqrbk1/2p2pp1/p1np1n1p/1p2p3/4P3/PBNP1N1P/1PPB1PP1/R2Q1RK1 w - - 3 12',
+  'r1bq1rk1/bpp2pp1/p1np1n1p/4p3/B3P3/2PP1N1P/PP3PP1/R1BQRNK1 b - - 3 11',
+  'r1bqrbk1/1pp2pp1/p1np1n1p/4p3/B3P2B/2PP1N2/PP1N1PPP/R2QR1K1 b - - 1 11',
+  '1R6/1P4k1/5p2/1r3K2/8/7P/6P1/8 w - - 5 55',
+  '3r4/5k2/5b1p/1ppr1PpP/1P1pR1P1/P2R1P2/4KB2/8 w - - 0 43',
+  '6k1/5p2/7p/4p1p1/pn2P3/2K1BP1P/6P1/8 b - - 2 45',
+  'r2q2k1/1p3r2/p2p2pp/3Ppn2/4N3/2R4P/PP1Q1PP1/2R3K1 w - - 0 23',
+  '7k/4R3/3p1r2/4p2p/4P3/1Q3N2/4KPq1/8 b - - 3 45',
+  '3rr1k1/1bpn1pbp/1n4p1/pR2p3/P3P3/2P2NNP/2B2PP1/2B1R1K1 w - - 2 22',
+  '1k1r4/1qp2p2/1b1p3p/1p1n3P/3P4/5Q2/1P2RPP1/R4K2 w - - 0 28',
+  '1r3r2/2p1qpk1/p1np1n1p/1p2pRp1/4P3/1BPPP1B1/PP4PP/R3Q1K1 b - - 0 21',
+  'r2q1rk1/2p1bppp/p1n1bn2/1p2p3/4P3/2P2N2/PPBN1PPP/R1BQR1K1 w - - 1 12',
+  'r1bqk2r/2p1bppp/p1np1n2/1p2p3/P3P3/1BN2N2/1PPP1PPP/R1BQ1RK1 b kq - 0 8',
+  '3r2k1/2p2bpp/p2r4/P2PpP2/BR1q4/7P/5PP1/2R1Q1K1 b - - 2 35',
+  '3k4/8/2RK4/6r1/3P4/8/8/8 b - - 14 60',
+  'r1bq1rk1/2p2ppp/p1n2n2/2b1p3/Pp2P3/1B3N2/1PPN1PPP/R1BQR1K1 w - - 2 12',
+  '1r1q4/6pk/3P2pp/1p1Q4/p2P4/P6P/1P3P2/3R2K1 b - - 0 31',
+  '5rk1/q1pb1ppp/1b1p1nn1/1p2p1B1/4P3/1BPP1N1P/1P2QPP1/4RNK1 b - - 7 17',
+  '1r4k1/5pbp/Q5p1/4p3/1P2q3/5NP1/5P1P/R5K1 w - - 0 28',
+  '4N1k1/3R2p1/4Pp2/1p5p/4n1P1/7P/1P3P1K/4r3 w - - 1 34',
+  'r2q1rk1/4bppp/p1pp1n2/1p2p3/3PP3/PPN1B2P/1P3PP1/R2Q1RK1 b - - 1 14',
+  'r1bqk2r/2pp1ppp/p1n2n2/1pb1p3/4P3/1BPP1N2/PP3PPP/RNBQK2R b KQkq - 1 7',
+  '8/6p1/2p2p1k/1p2p2p/1P2P2P/2PR2P1/2r5/4K3 b - - 9 52',
+  'r1bq1rk1/2p1bppp/p1n2n2/1p1pp3/4P3/1BP2N2/PP1P1PPP/RNBQR1K1 w - - 0 9',
+  '5rk1/4bppp/2p5/1p6/3pq3/3P3P/1PPB1PP1/R4K2 w - - 0 24',
+  '8/2p1k1p1/p3p3/2n1N3/4P2P/8/4K1P1/8 w - - 1 40',
+];
+		const generateButton = document.getElementById('generate');
+		const copyButton = document.getElementById('copy');
+		const copyNotification = document.getElementById('copy-notification');
+
+		generateButton?.addEventListener('click', () => {
+			const randomGame = ruyLopezRealGamesRandom[Math.floor(Math.random() * ruyLopezRealGamesRandom.length)];
+			if (copyButton) {
+				copyButton.dataset.fen = randomGame;
+				copyButton.textContent = randomGame;
+			}
+			window.board.position(randomGame);
+		})
+
+		copyButton?.addEventListener('click', async () => {
+			copyNotification?.classList.remove('copied');
+			try {
+				await navigator.clipboard.writeText(`${copyButton.dataset.fen}`);
+				copyNotification?.classList.add('copied');
+			} catch (error) {
+				console.error(error);
+			}
+		});
+	</script>
 </Layout>
